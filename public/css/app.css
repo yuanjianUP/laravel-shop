@@ -10865,3 +10865,7 @@ body {
 .footer .container p a {
   color: inherit;
 }
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
