@@ -24,5 +24,7 @@ Route::group(['middleware' => ['auth']],function() {
       Route::post('user_addresses', 'UserAddressesController@store')->name('user_addresses.store');
       // 编辑收货地址
       Route::get('user_addresses/{user_address}', 'UserAddressesController@edit')->name('user_addresses.edit');
+      Route::redirect('/','/products')->name('root');
+      Route::get('products', 'ProductsController@index')->name('products.index');
 });
 
