@@ -6,7 +6,9 @@
 
 require('./bootstrap');
 window.Vue = require('vue').default;
-
+//引入jquery
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,6 +30,8 @@ window.Vue = require('vue').default;
  */
 require('./components/SelectDistrict');
 require('./components/UserAddressesCreateAndEdit');
+
+
 const app = new Vue({
     el: '#app',
 });

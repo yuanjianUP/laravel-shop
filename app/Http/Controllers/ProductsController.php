@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    //
+    
     public function index(Request $request)
     {
         $builder = Product::query()->where('on_sale', true);
@@ -37,5 +37,13 @@ class ProductsController extends Controller
                 'order' => $order,
             ],
         ]);
+    }
+
+    public function show(Product $product, Request $request)
+    {
+        if (!$product->on_sale) {
+            throw new \Exception('商品未上架');
+        }
+        return view('products.show', ['product' => $product]);
     }
 }
