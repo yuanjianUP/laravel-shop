@@ -60,12 +60,44 @@
 
 @section('scriptsAfterJs')
 <script>
-  $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip({trigger: 'hover'});
-    $('.sku-btn').click(function () {
-      $('.product-info .price span').text($(this).data('price'));
-      $('.product-info .stock').text('库存：' + $(this).data('stock') + '件');
-    });
-  });
+      $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip({
+                  trigger: 'hover'
+            });
+            $('.sku-btn').click(function() {
+                  $('.product-info .price span').text($(this).data('price'));
+                  $('.product-info .stock').text('库存：' + $(this).data('stock') + '件');
+            });
+            $('.btn-add-to-cart').click(function() {
+                  //发起ajax请求
+                  axios.$post("{{ route('cart.add') }}", {
+                              sku_id: $('label.active input[name=skus]').val(),
+                              amount: $('input[name=amount] input').val()
+                        })
+                        .then(function(response) {
+                              swal('加入购物车成功', '', 'success');
+                        }),
+                        function(error) {
+                              if (error.response.status == 401) {
+                                    swal('请先登录', '', 'error');
+                              } else if (error.response.status == 422) {
+                                    // http 状态码为 422 代表用户输入校验失败
+                                    var html = '<div>';
+                                    _.each(error.response.data.errors, function(errors) {
+                                          _.each(errors, function(error) {
+                                                html += error + '<br>';
+                                          })
+                                    });
+                                    html += '</div>';
+                                    swal({
+                                          content: $(html)[0],
+                                          icon: 'error'
+                                    })
+                              }else{
+                                    swal('系统错误', '', 'error');
+                              }
+                        };
+            })
+      });
 </script>
 @endsection
