@@ -28,7 +28,7 @@
                                                 @endforeach
                                           </div>
                                     </div>
-                                    <div class="cart_amount"><label>数量</label><input type="text" class="form-control form-control-sm" value="1"><span>件</span><span class="stock"></span></div>
+                                    <div class="cart_amount"><label>数量</label><input name="amount" type="text" class="form-control form-control-sm" value="1"><span>件</span><span class="stock"></span></div>
                                     <div class="buttons">
                                           <button class="btn btn-success btn-favor">❤ 收藏</button>
                                           <button class="btn btn-primary btn-add-to-cart">加入购物车</button>
@@ -70,16 +70,15 @@
             });
             $('.btn-add-to-cart').click(function() {
                   //发起ajax请求
-                  axios.$post("{{ route('cart.add') }}", {
+                  axios.post("{{ route('cart.add') }}", {
                               sku_id: $('label.active input[name=skus]').val(),
-                              amount: $('input[name=amount] input').val()
+                              amount: $('input[name=amount]').val()
                         })
                         .then(function(response) {
-                              swal('加入购物车成功', '', 'success');
-                        }),
-                        function(error) {
+                              Swal.fire('加入购物车成功', '', 'success');
+                        },function(error) {
                               if (error.response.status == 401) {
-                                    swal('请先登录', '', 'error');
+                                    Swal.fire('请先登录', '', 'error');
                               } else if (error.response.status == 422) {
                                     // http 状态码为 422 代表用户输入校验失败
                                     var html = '<div>';
@@ -89,14 +88,14 @@
                                           })
                                     });
                                     html += '</div>';
-                                    swal({
-                                          content: $(html)[0],
+                                    Swal.fire({
+                                          html: $(html)[0],
                                           icon: 'error'
                                     })
                               }else{
-                                    swal('系统错误', '', 'error');
+                                    Swal.fire('系统错误', '', 'error');
                               }
-                        };
+                        });
             })
       });
 </script>

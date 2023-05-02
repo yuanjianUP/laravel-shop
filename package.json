@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "china-area-data": "^5.0.1",
-        "jquery": "^3.6.4"
+        "jquery": "^3.6.4",
+        "sweetalert2": "^11.7.3"
     }
 }

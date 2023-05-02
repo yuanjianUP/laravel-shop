@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function index(Request $request)
+    {
+        $cartItems = $request->user()->cartItems()->with(['productSku.product'])->get();
+        return view('cart.index',['cartItems' => $cartItems]);
+    }
     public function add(AddCartRequest $request)
     {
         $user = $request->user();

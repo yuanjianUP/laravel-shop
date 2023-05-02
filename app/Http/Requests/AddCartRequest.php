@@ -33,7 +33,7 @@ class AddCartRequest extends Request
                     }
                 }
             ],
-            'amount' => 'required|integer|min:1',
+            'amount' => ['required','integer','min:1'],
         ];
     }
 
@@ -48,6 +48,7 @@ class AddCartRequest extends Request
     {
         return [
             'sku_id.required' => '请选择商品',
+            'amount.required' => '请输入商品数量',
         ];
     }
 }
