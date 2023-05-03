@@ -31,5 +31,6 @@ Route::group(['middleware' => ['auth']],function() {
       Route::get('cart', 'CartController@index')->name('cart.index');
       // 移除购物车商品
       Route::post('orders', 'OrdersController@store')->name('orders.store');
+      Route::get('orders','OrdersController@index')->name('orders.index');
 });
 
