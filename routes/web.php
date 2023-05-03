@@ -29,5 +29,7 @@ Route::group(['middleware' => ['auth']],function() {
       Route::get('products/{product}', 'ProductsController@show')->name('products.show');
       Route::post('cart', 'CartController@add')->name('cart.add');
       Route::get('cart', 'CartController@index')->name('cart.index');
+      // 移除购物车商品
+      Route::post('orders', 'OrdersController@store')->name('orders.store');
 });
 
