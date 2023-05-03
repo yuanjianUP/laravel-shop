@@ -54,6 +54,8 @@ class OrdersController extends Controller
             //将下单的商品从购物车中移除
             $skuIds = collect($request->input('items'))->pluck('sku_id');
             $user->cartItems()->whereIn('product_sku_id', $skuIds)->delete();
+            //出发任务
+            $this->dispatch(new \App\Jobs\CloseOrder($order,config('app.order_ttl')));
             return $order;
         });
     }
