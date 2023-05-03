@@ -69,4 +69,9 @@ class OrdersController extends Controller
             return $order;
         });
     }
+
+    public function show(Order $order,Request $request)
+    {
+        return view('orders.show',['order' => $order->load(['items.productSku','items.product'])]);
+    }
 }
