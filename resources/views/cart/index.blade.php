@@ -110,6 +110,7 @@
     axios.post("{{ route('orders.store') }}", req)
       .then(function (response) {
         Swal.fire('订单提交成功', '', 'success')
+        location.href = '/orders/' + response.data.id
       }, function (error) {
         if(error.response.status === 422) {
           var html = '<div>';
