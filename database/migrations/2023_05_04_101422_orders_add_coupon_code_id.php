@@ -15,8 +15,8 @@ class OrdersAddCouponCodeId extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             //
-            $table->bigInteger('coupon_code_id')->nullable()->after('paid_at')->change();
-            //$table->foreign('coupon_code_id')->references('id')->on('coupon_codes')->onDelete('set null');
+            $table->unsignedBigInteger('coupon_code_id')->nullable()->after('paid_at')->change();
+            $table->foreign('coupon_code_id')->references('id')->on('coupon_codes')->onDelete('set null');
         });
     }
 
