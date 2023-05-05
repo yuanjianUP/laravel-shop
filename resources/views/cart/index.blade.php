@@ -103,6 +103,7 @@
       address_id: $('#order-form').find('select[name=address]').val(),
       items: [],
       remark: $('#order-form').find('textarea[name=remark]').val(),
+      coupon_code:$('input[name=coupon_code]').val(),
       _token: '{{ csrf_token() }}',
     };
     //遍历table标签内所有带有data-id属性的tr标签
