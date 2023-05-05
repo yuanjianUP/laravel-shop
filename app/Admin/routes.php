@@ -18,4 +18,6 @@ Route::group([
     $router->get('products/{id}/edit', 'ProductsController@edit');
     $router->put('products/{id}', 'ProductsController@update');
     $router->get('coupon_codes', 'CouponCodesController@index');
+    $router->post('coupon_codes', 'CouponCodesController@store');
+    $router->get('coupon_codes/create', 'CouponCodesController@create');
 });
