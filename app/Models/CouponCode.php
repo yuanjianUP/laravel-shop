@@ -10,7 +10,7 @@ class CouponCode extends Model
 {
     use HasFactory;
     use DefaultDatetimeFormat;
-    
+
     const TYPE_FIXED = 'fixed';
     const TYPE_PERCENT = 'percent';
 
@@ -36,6 +36,13 @@ class CouponCode extends Model
         'enable' => 'boolean',
     ];
 
-    
+    public static function findAvailableCode($length = 16)
+    {
+        do {
+            $code = strtoupper(Str::random($length));
+
+        }while(self::query()->where('code', $code)->exists());
+        return $code;
+    }
 
 }

@@ -52,33 +52,6 @@ class CouponCodesController extends AdminController
     }
 
     /**
-     * Make a show builder.
-     *
-     * @param mixed $id
-     * @return Show
-     */
-    protected function detail($id)
-    {
-        $show = new Show(CouponCode::findOrFail($id));
-
-        $show->field('id', __('Id'));
-        $show->field('name', __('Name'));
-        $show->field('code', __('Code'));
-        $show->field('type', __('Type'));
-        $show->field('value', __('Value'));
-        $show->field('total', __('Total'));
-        $show->field('used', __('Used'));
-        $show->field('min_amount', __('Min amount'));
-        $show->field('not_before', __('Not before'));
-        $show->field('not_after', __('Not after'));
-        $show->field('enabled', __('Enabled'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
-
-        return $show;
-    }
-
-    /**
      * Make a form builder.
      *
      * @return Form
