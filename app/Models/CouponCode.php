@@ -38,6 +38,10 @@ class CouponCode extends Model
         'enable' => 'boolean',
     ];
 
+    protected $dates = [
+        'not_before',
+        'not_after',
+    ];
     public static function findAvailableCode($length = 16)
     {
         do {
