@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
+use App\Models\CouponCode;
 use App\Models\Order;
 use App\Models\ProductSku;
 use App\Models\UserAddress;
@@ -24,6 +25,13 @@ class OrdersController extends Controller
     public function store(OrderRequest $request)
     {
         $user = $request->user();
+        $coupon = null;
+        if($code = $request->input('coupon_code')){
+            $coupon = CouponCode::where('code',$code)->first();
+            if(!$coupon){
+                throw new \App\Exceptions\CouponCodeUnavailableException('优惠券不存在');
+            }
+        }
         $order = \DB::transaction(function () use ($user, $request) {
             $address = UserAddress::find($request->input('address_id'));
             $address->update(['last_used_at' => Carbon::now()]);
